@@ -551,8 +551,6 @@ export default function Index(): JSX.Element {
     if (talent.type === "select") {
       const { x, y } = talent;
 
-      debugger;
-
       return values.some(
         (t) =>
           t.parents?.includes(key) && t.invested > 0 && t.x !== x && t.y !== y
