@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import type { ChangeEventHandler, MouseEventHandler } from "react";
 import { useState } from "react";
 
@@ -40,6 +41,67 @@ type FlattenedTalent<T extends Talent> = Omit<T, "children" | "options"> & {
   invested: number;
 };
 
+const convokeSelect: Select = {
+  type: "select",
+  x: 3,
+  y: 9,
+  options: [
+    {
+      type: "active",
+      id: 93,
+      name: "Convoke the Spirits",
+      x: 3,
+      y: 9,
+    },
+  ],
+};
+
+const flowersPassive: Passive = {
+  type: "passive",
+  name: "Flowers",
+  id: 94,
+  levels: 2,
+  x: 4,
+  y: 8,
+  children: [convokeSelect],
+};
+
+const someFeralPassive: Passive = {
+  type: "passive",
+  id: 92,
+  levels: 1,
+  name: "Feral Passive",
+  x: 3,
+  y: 7,
+  children: [flowersPassive],
+};
+
+const cultivationPassive: Passive = {
+  type: "passive",
+  id: 200_390,
+  name: "Cultivation",
+  levels: 1,
+  x: 4,
+  y: 6,
+  children: [someFeralPassive],
+};
+
+const overgrowthSelect: Select = {
+  type: "select",
+  options: [
+    {
+      name: "Overgrowth",
+      id: 203_651,
+      type: "active",
+      x: 2,
+      y: 6,
+    },
+  ],
+  x: 2,
+  y: 6,
+  children: [someFeralPassive],
+};
+
 const cenarionWardSelect: Talent["children"] = [
   {
     type: "select",
@@ -76,24 +138,16 @@ const cenarionWardSelect: Talent["children"] = [
         x: 4,
         y: 5,
         id: 99,
-        children: [
-          {
-            type: "passive",
-            id: 97,
-            name: "Healing Touch",
-            levels: 1,
-            x: 4,
-            y: 7,
-          },
-        ],
+        children: [cultivationPassive],
       },
       {
-        name: "Thick Skin idk",
+        name: "Thick Skin?",
         levels: 1,
         type: "passive",
         x: 2,
         y: 5,
         id: 98,
+        children: [overgrowthSelect],
       },
     ],
   },
@@ -122,11 +176,11 @@ const restoration: Tree = [
             type: "active",
             children: [
               {
-                name: "Rejuvenation",
+                name: "Regrowth",
                 levels: 2,
                 x: 2,
                 y: 3,
-                id: 4,
+                id: 8936,
                 type: "passive",
                 children: cenarionWardSelect,
               },
@@ -137,6 +191,76 @@ const restoration: Tree = [
                 y: 4,
                 id: 5,
                 type: "passive",
+                children: [
+                  {
+                    name: "Soul of the Forest",
+                    id: 158_478,
+                    levels: 1,
+                    type: "passive",
+                    x: 1,
+                    y: 5,
+                    children: [
+                      overgrowthSelect,
+                      {
+                        type: "select",
+                        x: 1,
+                        y: 7,
+                        options: [
+                          {
+                            name: "Tree of Life",
+                            id: 123,
+                            type: "active",
+                            x: 1,
+                            y: 7,
+                          },
+                        ],
+                        children: [
+                          {
+                            type: "passive",
+                            name: "Rejuvenation",
+                            x: 0,
+                            y: 8,
+                            levels: 1,
+                            id: 231_040,
+                            children: [
+                              {
+                                type: "select",
+                                x: 0,
+                                y: 9,
+                                options: [
+                                  {
+                                    id: 274_902,
+                                    name: "Photosynthesis",
+                                    type: "active",
+                                    x: 0,
+                                    y: 9,
+                                  },
+                                ],
+                              },
+                            ],
+                          },
+                          {
+                            type: "passive",
+                            x: 1,
+                            y: 8,
+                            levels: 1,
+                            name: "Another Swirlie",
+                            id: 90,
+                          },
+                          {
+                            type: "passive",
+                            name: "Fury of Elune",
+                            id: 202_770,
+                            children: [convokeSelect],
+                            x: 2,
+                            y: 8,
+                            levels: 1,
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                ],
               },
             ],
           },
@@ -185,8 +309,8 @@ const restoration: Tree = [
               {
                 levels: 2,
                 name: "Ysera's Gift",
-                y: 3,
                 x: 4,
+                y: 3,
                 id: 145_108,
                 type: "passive",
                 children: cenarionWardSelect,
@@ -195,9 +319,66 @@ const restoration: Tree = [
                 name: "Swiftmend",
                 levels: 1,
                 id: 18_562,
-                y: 4,
                 x: 5,
+                y: 4,
                 type: "passive",
+                children: [
+                  {
+                    name: "Germination",
+                    levels: 1,
+                    id: 155_675,
+                    type: "passive",
+                    x: 5,
+                    y: 5,
+                    children: [
+                      cultivationPassive,
+                      {
+                        name: "Green Swirlie",
+                        id: 89,
+                        levels: 2,
+                        type: "passive",
+                        x: 5,
+                        y: 6,
+                        children: [
+                          {
+                            type: "active",
+                            x: 5,
+                            y: 7,
+                            id: 95,
+                            name: "Cat Eyes",
+                            children: [
+                              flowersPassive,
+                              {
+                                type: "passive",
+                                name: "some shaman icon",
+                                id: 92,
+                                x: 6,
+                                y: 8,
+                                levels: 1,
+                                children: [
+                                  {
+                                    type: "select",
+                                    x: 6,
+                                    y: 9,
+                                    options: [
+                                      {
+                                        type: "active",
+                                        id: 197_721,
+                                        name: "Flourish",
+                                        x: 6,
+                                        y: 9,
+                                      },
+                                    ],
+                                  },
+                                ],
+                              },
+                            ],
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                ],
               },
             ],
           },
@@ -328,8 +509,8 @@ export default function Index(): JSX.Element {
     return acc > talent.y ? acc : talent.y;
   }, 0);
 
-  const matrix = Array.from<null[]>({ length: maxY })
-    .fill(Array.from<null>({ length: maxX }).fill(null))
+  const matrix = Array.from<null[]>({ length: maxY + 1 })
+    .fill(Array.from<null>({ length: maxX + 1 }).fill(null))
     .map((row, columnIndex) => {
       return row.map((column, rowIndex) => {
         const key = [rowIndex, columnIndex].join("-");
@@ -354,12 +535,10 @@ export default function Index(): JSX.Element {
       .some((match) => {
         switch (match.type) {
           case "active":
+          case "select":
             return match.invested === 1;
           case "passive":
             return match.invested === match.levels;
-          case "select": {
-            return match.invested === 1;
-          }
         }
       });
   };
@@ -372,15 +551,57 @@ export default function Index(): JSX.Element {
     if (talent.type === "select") {
       const { x, y } = talent;
 
+      debugger;
+
       return values.some(
         (t) =>
           t.parents?.includes(key) && t.invested > 0 && t.x !== x && t.y !== y
       );
     }
 
-    return values.some((talent) => {
-      return talent.parents?.includes(key) && talent.invested > 0;
-    });
+    // bail if possible dependants could be reached from a diff branch
+    if (talent.type === "passive" && talent.invested < talent.levels) {
+      return false;
+    }
+
+    const dependants = values.filter((talent) => talent.parents?.includes(key));
+
+    const dependantsWithAlternativeBranch = [
+      ...new Set(
+        dependants
+          .filter((dependant) => (dependant.parents?.length ?? 0) > 1)
+          .flatMap((dependant) => dependant.parents)
+      ),
+    ].filter(
+      (dependantKey): dependantKey is string =>
+        typeof dependantKey !== "undefined" && dependantKey !== key
+    );
+
+    // if there is a dependant with multiple parents, check whether the other parent is satisfied
+    const otherDependantSatisfiesRequirement = dependantsWithAlternativeBranch
+      .map((key) => tree[key])
+      .some((talent) => {
+        switch (talent.type) {
+          case "passive":
+            return talent.invested === talent.levels;
+          case "select":
+          case "active":
+            return talent.invested === 1;
+        }
+      });
+
+    if (talent.name === "Ironbark") {
+      debugger;
+    }
+
+    // if so, no other dependant may only depend on this node
+    if (otherDependantSatisfiesRequirement) {
+      return dependants
+        .filter((dependant) => (dependant.parents?.length ?? 0) === 1)
+        .some((dependant) => dependant.invested > 0);
+    }
+
+    return dependants.some((dependant) => dependant.invested > 0);
   };
 
   const handleClick: MouseEventHandler<HTMLButtonElement> = (event) => {
@@ -397,18 +618,16 @@ export default function Index(): JSX.Element {
         return prev;
       }
 
-      const nextInvestment =
-        match.invested + 1 > match.levels ? 0 : match.invested + 1;
-
       return {
         ...prev,
         [key]: {
           ...match,
-          invested: nextInvestment,
+          invested: match.invested + 1 > match.levels ? 0 : match.invested + 1,
         },
       };
     });
   };
+
   const handleToggle: ChangeEventHandler<HTMLInputElement> = (event) => {
     const { key } = event.target.dataset;
 
@@ -426,6 +645,7 @@ export default function Index(): JSX.Element {
       };
     });
   };
+
   const handleSelection: ChangeEventHandler<HTMLSelectElement> = (event) => {
     const { value } = event.target;
 
@@ -474,24 +694,39 @@ export default function Index(): JSX.Element {
             <tr key={rowIndex}>
               {row.map((talent, columnIndex) => {
                 if (!talent) {
-                  return <td key={columnIndex} />;
+                  return (
+                    <td
+                      className="p-2 text-slate-800 text-center"
+                      key={columnIndex}
+                    >{`${columnIndex}-${rowIndex}`}</td>
+                  );
                 }
 
                 if (talent.type === "active") {
+                  const disabled =
+                    !satisfiesRequirements(talent) || hasDependants(talent);
+                  const key = `${columnIndex}-${rowIndex}`;
+
                   return (
-                    <td key={columnIndex}>
-                      <label>
-                        <input
-                          type="checkbox"
-                          disabled={
-                            !satisfiesRequirements(talent) ||
-                            hasDependants(talent)
-                          }
-                          onChange={handleToggle}
-                          name={`${talent.id}`}
-                          data-key={`${columnIndex}-${rowIndex}`}
-                        />
+                    <td key={columnIndex} className="p-4">
+                      <input
+                        type="checkbox"
+                        disabled={disabled}
+                        onChange={handleToggle}
+                        name={`${talent.id}`}
+                        data-key={key}
+                        className="hidden"
+                        id={key}
+                        aria-label={talent.name}
+                      />
+                      <label
+                        htmlFor={key}
+                        className={`rounded-md bg-slate-600 p-2 cursor-pointer ${
+                          disabled ? "bg-slate-800" : ""
+                        }`}
+                      >
                         {talent.name}
+                        <sup>{talent.invested}/1</sup>
                       </label>
                     </td>
                   );
@@ -506,17 +741,17 @@ export default function Index(): JSX.Element {
                         talent.type === "active"
                     );
 
-                  const fulfillsRequirements = satisfiesRequirements(talent);
-                  const childrenActive = hasDependants(talent);
-
-                  const disabled = !fulfillsRequirements || childrenActive;
-
                   return (
                     <td key={columnIndex}>
-                      <select onChange={handleSelection} disabled={disabled}>
-                        <option value={`${talent.x}-${talent.y}`}>
-                          deselect
-                        </option>
+                      <select
+                        onChange={handleSelection}
+                        disabled={!satisfiesRequirements(talent)}
+                      >
+                        {hasDependants(talent) ? null : (
+                          <option value={`${talent.x}-${talent.y}`}>
+                            deselect
+                          </option>
+                        )}
                         {options.map((talent, index) => {
                           return (
                             <option
@@ -533,18 +768,24 @@ export default function Index(): JSX.Element {
                   );
                 }
 
+                const disabled =
+                  !satisfiesRequirements(talent) || hasDependants(talent);
+
                 return (
-                  <td key={columnIndex}>
+                  <td key={columnIndex} className="p-2">
                     <button
                       type="button"
-                      disabled={
-                        !satisfiesRequirements(talent) || hasDependants(talent)
-                      }
+                      disabled={disabled}
                       onClick={handleClick}
                       data-key={`${columnIndex}-${rowIndex}`}
+                      className={`rounded-md bg-slate-600 p-2 ${
+                        disabled ? "bg-slate-800" : ""
+                      }`}
                     >
                       {talent.name}
-                      <sup>{talent.invested}</sup>
+                      <sup>
+                        {talent.invested}/{talent.levels}
+                      </sup>
                     </button>
                   </td>
                 );
