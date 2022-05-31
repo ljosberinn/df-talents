@@ -12,9 +12,9 @@ const barkskinPassive: Passive = {
   children: [
     {
       type: "passive",
-      id: 0,
+      id: 236019,
       levels: 1,
-      name: "Bear Icon",
+      name: "Strength of the Wild",
       x: 3,
       y: 2,
     },
@@ -272,10 +272,10 @@ const typhoonSelect: Select = {
       children: [
         {
           type: "active",
-          name: "No Idea",
+          name: "Nature's Vigil",
           x: 5,
           y: 9,
-          id: 912,
+          id: 124974,
         },
       ],
     },
