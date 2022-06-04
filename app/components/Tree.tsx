@@ -263,11 +263,21 @@ export function Tree({ tree: initial }: TreeProps): JSX.Element {
                       />
                       <label
                         htmlFor={key}
-                        className={`rounded-md bg-slate-600 p-2 cursor-pointer ${
+                        className={`rounded-md cursor-pointer ${
                           disabled ? "bg-slate-800" : ""
                         }`}
                       >
-                        {talent.name}
+                        {talent.icon ? (
+                          <img
+                            src={`https://wow.zamimg.com/images/wow/icons/large/${talent.icon}.jpg`}
+                            width="40"
+                            height="40"
+                            loading="lazy"
+                            alt={talent.name}
+                          />
+                        ) : (
+                          talent.name
+                        )}
                         <sup>{talent.invested}/1</sup>
                       </label>
                     </td>
@@ -324,7 +334,17 @@ export function Tree({ tree: initial }: TreeProps): JSX.Element {
                         disabled ? "bg-slate-800" : ""
                       }`}
                     >
-                      {talent.name}
+                      {talent.icon ? (
+                        <img
+                          src={`https://wow.zamimg.com/images/wow/icons/large/${talent.icon}.jpg`}
+                          width="40"
+                          height="40"
+                          loading="lazy"
+                          alt={talent.name}
+                        />
+                      ) : (
+                        talent.name
+                      )}
                       <sup>
                         {talent.invested}/{talent.levels}
                       </sup>

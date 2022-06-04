@@ -2,9 +2,10 @@ export type TalentBase = {
   x: number;
   y: number;
   minPointRequirement?: number;
+  icon: string;
 };
 
-export type Select = TalentBase & {
+export type Select = Omit<TalentBase, "icon"> & {
   type: "select";
   options: Active[];
   children?: (Select | Active | Passive)[];
@@ -68,6 +69,7 @@ const createFlattenedChild = (
       id: talent.id,
       name: talent.name,
       invested: 0,
+      icon: talent.icon,
     };
 
     if (parent) {
@@ -89,6 +91,7 @@ const createFlattenedChild = (
     name: talent.name,
     levels: talent.levels,
     invested: 0,
+    icon: talent.icon,
   };
 
   if (parent) {
