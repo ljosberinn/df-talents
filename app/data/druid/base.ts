@@ -88,7 +88,7 @@ const improvedBarkskinPassive: Passive = {
   children: [
     {
       type: "passive",
-      id: 0,
+      id: 236_019,
       levels: 1,
       name: "Improved Frenzied Regenration (NNF)",
       x: 4,
